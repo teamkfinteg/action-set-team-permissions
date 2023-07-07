@@ -20,7 +20,7 @@ jobs:
             repo: context.repo.repo,
             });
             console.log(topics.data.names)
-            const size = topics.data.length;
+            const size = topics.data.names.length;
             console.log(`Length: ${size}`);
             const pos = topics.data.names.indexOf('kf-customer-private')
             console.log(`Position: ${pos}`);
@@ -28,7 +28,6 @@ jobs:
             (topics.length > 0 && topics.data.names.indexOf('kf-customer-private') > 0) ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             console.log(`IS_PRIVATE = ${IS_PRIVATE}`);
-            console.log(`env.IS_PRIVATE = ${{env.IS_PRIVATE}}`);
             
       - name: Debugging Step
         id: debug_step
@@ -42,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION_NUMBER: ${{ env.RELEASE_VERSION }}
-        if: env.IS_PRIVATE != 'T'
+        if: ${IS_PRIVATE} != 'T'
         with:
           script: |
             console.log(`This is the step where the teams get updated`);
