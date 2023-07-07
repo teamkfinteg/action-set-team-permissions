@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION_NUMBER: ${{ env.RELEASE_VERSION }}
-        if: ${IS_PRIVATE} != 'T'
+        if: IS_PRIVATE != 'T'
         with:
           script: |
             console.log(`This is the step where the teams get updated`);
