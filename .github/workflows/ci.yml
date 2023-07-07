@@ -21,7 +21,7 @@ jobs:
             });
             console.log(topics.data.names[0])
             var IS_PRIVATE=
-            (topics.length > 0 && topics.indexOf('kf-customer-private')) > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
+            (topics.length > 0 && topics.indexOf('kf-customer-private') > 0) ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
  
