@@ -24,7 +24,7 @@ jobs:
             (topics.length > 0 && topics.data.names.indexOf('kf-customer-private') > 0) ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             console.log(`IS_PRIVATE = ${IS_PRIVATE}`);
-            console.log(`env.IS_PRIVATE = ${env.IS_PRIVATE}`);
+            console.log(`env.IS_PRIVATE = ${{env.IS_PRIVATE}}`);
             
  
       - name: GitHub Script configures teams if not private
