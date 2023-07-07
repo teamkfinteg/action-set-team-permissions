@@ -45,5 +45,13 @@ jobs:
               const permission = element[1];
             });
             const org = context.repo.owner;
-            console.log(org)
+            console.log(`org: ${org}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}\nrepo ${repo}`)
+            const response = await github.request("PUT /orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}", {
+              org,
+              team_slug,
+              context.repo.owner,
+              context.repo.repo,
+              permission
+            });
+
  
