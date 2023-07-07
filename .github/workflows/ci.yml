@@ -39,10 +39,11 @@ jobs:
             ['private-access', 'pull'],
             ['release_builders', 'admin']
             ];
+            const org = context.repo.owner;
             teams.forEach(element => {
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
               const permission = element[1];
+              console.log(`org: ${org}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}\nrepo ${repo}`)
             });
-            const org = context.repo.owner;
-            console.log(`org: ${org}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}\nrepo ${repo}`)
+
