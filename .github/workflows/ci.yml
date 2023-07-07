@@ -19,7 +19,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             });
-            console.log(topics)
+            console.log(topics.data)
             var IS_PRIVATE=
             topics.indexOf('kf-customer-private') > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
