@@ -30,7 +30,12 @@ jobs:
             console.log(`IS_PRIVATE = ${IS_PRIVATE}`);
             console.log(`env.IS_PRIVATE = ${{env.IS_PRIVATE}}`);
             
- 
+      - name: Debugging Step
+        id: debug_step
+        if: env.IS_PRIVATE != 'T'
+        run: |
+          echo IS_PRIVATE = ${IS_PRIVATE}
+
       - name: GitHub Script configures teams if not private
         id: update_teams
         uses: actions/github-script@v6
