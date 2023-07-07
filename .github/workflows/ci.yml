@@ -40,6 +40,7 @@ jobs:
             ['release_builders', 'admin']
             ];
             const org = context.repo.owner;
+            const owner = org;
             teams.forEach(element => {
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
