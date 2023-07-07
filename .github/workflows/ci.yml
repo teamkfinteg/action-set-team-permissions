@@ -43,6 +43,6 @@ jobs:
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
               const permission = element[1];
-            }
+            });
 
  
