@@ -20,7 +20,7 @@ jobs:
             repo: context.repo.repo,
             });
             console.log(topics.data.names)
-            const size = topics.length;
+            const size = topics.data.length;
             console.log(`Length: ${size}`);
             const pos = topics.data.names.indexOf('kf-customer-private')
             console.log(`Position: ${pos}`);
