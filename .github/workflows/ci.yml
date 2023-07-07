@@ -19,32 +19,30 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             });
-            console.log(topics.data.names)
             const size = topics.data.names.length;
-            console.log(`Length: ${size}`);
             const pos = topics.data.names.indexOf('kf-customer-private')
-            console.log(`Position: ${pos}`);
             var IS_PRIVATE=
             (size > 0 && pos > 0) ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
-            console.log(`IS_PRIVATE = ${IS_PRIVATE}`);
             
-      - name: Debugging Step
-        id: debug_step
-        if: env.IS_PRIVATE != 'T'
-        run: |
-          echo IS_PRIVATE = ${IS_PRIVATE}
-
       - name: GitHub Script configures teams if not private
         id: update_teams
         uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION_NUMBER: ${{ env.RELEASE_VERSION }}
         if: env.IS_PRIVATE != 'T'
         with:
           script: |
-            console.log(`This is the step where the teams get updated`);
-            console.log('That is next');
+            const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
+            ['field-software-engineers', 'push'],
+            ['integration-engineers', 'push'],
+            ['private-access', 'pull'],
+            ['release_builders', 'admin']
+            ];
+            teams.forEach(element => {
+              console.log(element[0] + ' : ' + element[1])
+              const team_slug = element[0];
+              const permission = element[1];
+            }
 
  
