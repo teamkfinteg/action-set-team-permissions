@@ -1,9 +1,9 @@
 name: Update team permissions
-on: [workflow_dispatch,workflow_call]
+on: [workflow_dispatch,workflow_call,push]
         
 jobs:
   check-topics:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
       customer_private: ${{ steps.check_private.outputs.is-private }}
     steps:
@@ -19,7 +19,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             });
-            console.log(topics.data)
+            console.log(topics.data.names)
             var IS_PRIVATE=
             topics.indexOf('kf-customer-private') > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
