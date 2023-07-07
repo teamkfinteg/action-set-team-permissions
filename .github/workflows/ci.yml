@@ -1,4 +1,4 @@
-name: Create GitHub release version and location
+name: Update team permissions
 on: [workflow_dispatch,workflow_call]
         
 jobs:
@@ -21,7 +21,7 @@ jobs:
             });
             console.log(topics)
             var IS_PRIVATE=
-            topics.indexOF('kf-customer-private') > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
+            topics.indexOf('kf-customer-private') > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
  
