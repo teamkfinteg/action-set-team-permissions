@@ -1,0 +1,45 @@
+name: Create GitHub release version and location
+on:
+  [workflow_call,workflow_dispatch]:
+    outputs:
+      customer_private:
+        description: Does the topics array contain kf-customer-private
+        value: ${{ jobs.check-topics.outputs.customer_private }}
+    
+jobs:
+  check-topics:
+    runs-on: windows-latest
+    outputs:
+      customer_private: ${{ steps.check_private.outputs.is-private }}
+    steps:
+      - name: GitHub Script checks for topics array containing kf-customer-private
+        id: check_private
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            // check for existing tags on this major.minor version
+            const topics = await github.rest.repos.getAllTopics({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            });
+            console.log(topics)
+            var IS_PRIVATE=
+            topics.indexOF('kf-customer-private') > 0 ? IS_PRIVATE='T' : IS_PRIVATE='F'
+            core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
+            
+ 
+      - name: GitHub Script configures teams if not private
+        id: update_teams
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION_NUMBER: ${{ env.RELEASE_VERSION }}
+        if: env.IS_PRIVATE != 'T'
+        with:
+          script: |
+            console.log(`This is the step where the teams get updated`);
+            console.log('That is next');
+
+ 
