@@ -1,11 +1,6 @@
 name: Create GitHub release version and location
-on:
-  [workflow_call,workflow_dispatch]:
-    outputs:
-      customer_private:
-        description: Does the topics array contain kf-customer-private
-        value: ${{ jobs.check-topics.outputs.customer_private }}
-    
+on: [workflow_dispatch,workflow_call]
+        
 jobs:
   check-topics:
     runs-on: windows-latest
