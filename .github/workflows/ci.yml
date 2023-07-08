@@ -35,12 +35,12 @@ jobs:
             const repo = context.repo.repo;
             const org = context.repo.owner;
             const owner = org;
-            console.log(`org: ${org}\nrepo ${repo}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}`);
+            console.log(`org: ${org}\nrepo ${repo}`);
             teams.forEach(element => {
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
               const permission = element[1];
-              console.log(`team_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}`)
+              console.log(`team_slug: ${team_slug}\npermission: ${permission}`)
               github.rest.teams.addOrUpdateRepoPermissionsInOrg({
                 org,
                 team_slug,
