@@ -34,6 +34,16 @@ jobs:
         with:
           script: |
             const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
+
+      - name: GitHub Script configures teams if not private
+        id: update_teams
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: env.IS_PRIVATE != 'T'
+        with:
+          script: |
+            const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
             ['field-software-engineers', 'push'],
             ['integration-engineers', 'push'],
             ['private-access', 'pull'],
@@ -47,7 +57,7 @@ jobs:
               const team_slug = element[0];
               const permission = element[1];
               console.log(`org: ${org}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}\nrepo ${repo}`)
-              const response = github.rest.teams.addOrUpdateRepoPermissionsInOrg({
+              github.rest.teams.addOrUpdateRepoPermissionsInOrg({
                 org,
                 team_slug,
                 owner,
