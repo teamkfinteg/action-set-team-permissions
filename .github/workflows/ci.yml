@@ -26,7 +26,7 @@ jobs:
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
       - name: GitHub Script configures teams if not private
-        id: update_teams
+        id: update_team
         uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
