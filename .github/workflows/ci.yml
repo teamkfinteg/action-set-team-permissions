@@ -41,7 +41,7 @@ jobs:
         with:
           github-token: ${{ secrets.TEST_ACTION_GH_PAT }}
           script: |
-            const teams = ${env.teamArray};
+            const teams = ${{env.teamArray}};
             const repo = context.repo.repo;
             const org = context.repo.owner;
             const owner = org;
