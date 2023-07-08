@@ -1,7 +1,17 @@
 name: Update team permissions
-on: [workflow_dispatch,workflow_call,push]
-env:
-  teamArray : '[["field-software-engineers", "push"],["integration-engineers", "push"],["private-access", "pull"], ["release_builders", "admin"]]'
+on:
+  workflow_call:
+    secrets:
+      token:
+        description: 'Secret token from caller workflow to access SDK repo'
+        required: true
+    inputs:
+      teamArray: 
+        description: Array of arrays denoting teams and permissions 
+        required: true
+        type: string
+        default: '["field-software-engineers", "push"],["integration-engineers", "push"],["private-access", "pull"], ["release_builders", "admin"]]'
+       
 jobs:
   check-topics:
     runs-on: ubuntu-latest
@@ -39,9 +49,14 @@ jobs:
         uses: actions/github-script@v6
         if: env.IS_PRIVATE != 'T'
         with:
-          github-token: ${{ secrets.TEST_ACTION_GH_PAT }}
+          github-token: ${{ secrets.token }}
           script: |
-            const teams = ${{env.teamArray}};
+            const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
+            ['field-software-engineers', 'push'],
+            ['integration-engineers', 'push'],
+            ['private-access', 'pull'],
+            ['release_builders', 'admin']
+            ];
             const repo = context.repo.repo;
             const org = context.repo.owner;
             const owner = org;
