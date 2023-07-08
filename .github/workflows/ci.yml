@@ -1,5 +1,5 @@
 name: Update team permissions
-on: [workflow_dispatch,workflow_call,push]
+on: [workflow_dispatch,push]
 env:
   teamArray : '[["field-software-engineers", "push"],["integration-engineers", "push"],["private-access", "pull"], ["release_builders", "admin"]]'
 jobs:
@@ -25,16 +25,6 @@ jobs:
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
       - name: GitHub Script configures teams if not private
-        id: update_team
-        uses: actions/github-script@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: env.IS_PRIVATE != 'T'
-        with:
-          script: |
-            console.log('noop')
-
-      - name: GitHub Script configures teams if not private
         id: update_teams
         uses: actions/github-script@v6
         if: env.IS_PRIVATE != 'T'
@@ -45,11 +35,12 @@ jobs:
             const repo = context.repo.repo;
             const org = context.repo.owner;
             const owner = org;
+            console.log(`org: ${org}\nrepo ${repo}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}`);
             teams.forEach(element => {
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
               const permission = element[1];
-              console.log(`org: ${org}\nteam_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}\nrepo ${repo}`)
+              console.log(`team_slug: ${team_slug}\npermission: ${permission}\nowner: ${owner}`)
               github.rest.teams.addOrUpdateRepoPermissionsInOrg({
                 org,
                 team_slug,
