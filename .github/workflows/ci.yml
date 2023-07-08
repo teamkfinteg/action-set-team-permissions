@@ -41,10 +41,10 @@ jobs:
           github-token: ${{ secrets.TEST_ACTION_GH_PAT }}
           script: |
             const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
-            ['field-software-engineers', 'push'],
-            ['integration-engineers', 'push'],
-            ['private-access', 'pull'],
-            ['release_builders', 'admin']
+            ["field-software-engineers", "push"],
+            ["integration-engineers", "push"],
+            ["private-access", "pull"],
+            ["release_builders", "admin"]
             ];
             const repo = context.repo.repo;
             const org = context.repo.owner;
