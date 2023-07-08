@@ -40,7 +40,6 @@ jobs:
               console.log(element[0] + ' : ' + element[1])
               const team_slug = element[0];
               const permission = element[1];
-              console.log(`team_slug: ${team_slug}\npermission: ${permission}`)
               github.rest.teams.addOrUpdateRepoPermissionsInOrg({
                 org,
                 team_slug,
