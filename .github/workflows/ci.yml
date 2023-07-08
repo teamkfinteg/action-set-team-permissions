@@ -10,8 +10,6 @@ jobs:
       - name: GitHub Script checks for topics array containing kf-customer-private
         id: check_private
         uses: actions/github-script@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
             // check for existing topics on this major.minor version
@@ -38,10 +36,9 @@ jobs:
       - name: GitHub Script configures teams if not private
         id: update_teams
         uses: actions/github-script@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.TEST_ACTION_GH_PAT }}
         if: env.IS_PRIVATE != 'T'
         with:
+          github-token: ${{ secrets.TEST_ACTION_GH_PAT }}
           script: |
             const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
             ['field-software-engineers', 'push'],
