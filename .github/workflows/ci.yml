@@ -39,7 +39,7 @@ jobs:
         id: update_teams
         uses: actions/github-script@v6
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TEST_ACTION_GH_PAT }}
         if: env.IS_PRIVATE != 'T'
         with:
           script: |
