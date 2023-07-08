@@ -26,14 +26,14 @@ jobs:
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
       - name: GitHub Script configures teams if not private
-        id: update_teams
+        id: update_team
         uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: env.IS_PRIVATE != 'T'
         with:
           script: |
-            const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
+            console.log('noop')
 
       - name: GitHub Script configures teams if not private
         id: update_teams
