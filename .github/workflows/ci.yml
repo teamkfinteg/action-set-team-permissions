@@ -1,6 +1,7 @@
 name: Update team permissions
 on: [workflow_dispatch,workflow_call,push]
-        
+env:
+  teamArray : '["field-software-engineers", "push"],["integration-engineers", "push"],["private-access", "pull"], ["release_builders", "admin"]]'
 jobs:
   check-topics:
     runs-on: ubuntu-latest
@@ -40,12 +41,7 @@ jobs:
         with:
           github-token: ${{ secrets.TEST_ACTION_GH_PAT }}
           script: |
-            const teams = [ // Using array of arrays because team names contain hyphen character, illegal json
-            ["field-software-engineers", "push"],
-            ["integration-engineers", "push"],
-            ["private-access", "pull"],
-            ["release_builders", "admin"]
-            ];
+            const teams = ${env.teamArray};
             const repo = context.repo.repo;
             const org = context.repo.owner;
             const owner = org;
