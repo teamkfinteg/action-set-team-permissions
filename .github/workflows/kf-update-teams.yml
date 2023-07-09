@@ -38,10 +38,10 @@ jobs:
         id: update_teams
         uses: actions/github-script@v6
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_TOKEN: ${{ secrets.GH_REPO_CONFIG }}
         if: env.IS_PRIVATE != 'T'
         with:
-          github-token: ${{ secrets.token }}
+          github-token: ${{ secrets.GH_REPO_CONFIG }}
           script: |
             const teams = ${{inputs.teamArray}}
             const repo = context.repo.repo
