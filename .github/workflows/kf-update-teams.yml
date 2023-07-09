@@ -8,7 +8,7 @@ on:
     inputs:
       teamArray: 
         description: Array of arrays denoting teams and permissions 
-        required: true
+        required: false
         type: string
         default: '[["field-software-engineers", "push"],["integration-engineers", "push"],["private-access", "pull"], ["release_builders", "admin"]]'
        
