@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_CONFIG }}
         if: env.IS_PRIVATE != 'T'
         with:
-          github-token: ${{ secrets.GH_REPO_CONFIG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const teams = ${{inputs.teamArray}}
             const repo = context.repo.repo
