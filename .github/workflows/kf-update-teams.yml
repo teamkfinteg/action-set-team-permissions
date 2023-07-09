@@ -34,27 +34,27 @@ jobs:
             (size > 0 && pos > 0) ? IS_PRIVATE='T' : IS_PRIVATE='F'
             core.exportVariable('IS_PRIVATE', `${IS_PRIVATE}`);
             
-      - name: GitHub Script configures teams if not private
-        id: update_teams
-        uses: actions/github-script@v6
-        if: env.IS_PRIVATE != 'T'
-        with:
-          github-token: ${{ secrets.token }}
-          script: |
-            const teams = ${{env.teamArray}};
-            const repo = context.repo.repo;
-            const org = context.repo.owner;
-            const owner = org;
-            console.log(`org: ${org}\nrepo ${repo}`);
-            teams.forEach(element => {
-              console.log(element[0] + ' : ' + element[1])
-              const team_slug = element[0];
-              const permission = element[1];
-              github.rest.teams.addOrUpdateRepoPermissionsInOrg({
-                org,
-                team_slug,
-                owner,
-                repo,
-              });
-             });
+      #- name: GitHub Script configures teams if not private
+      #  id: update_teams
+      #  uses: actions/github-script@v6
+      #  if: env.IS_PRIVATE != 'T'
+      #  with:
+      #    github-token: ${{ secrets.token }}
+      #    script: |
+      #      const teams = ${{env.teamArray}};
+      #      const repo = context.repo.repo;
+      #      const org = context.repo.owner;
+      #      const owner = org;
+      #      console.log(`org: ${org}\nrepo ${repo}`);
+      #      teams.forEach(element => {
+      #        console.log(element[0] + ' : ' + element[1])
+      #        const team_slug = element[0];
+      #        const permission = element[1];
+      #        github.rest.teams.addOrUpdateRepoPermissionsInOrg({
+      #          org,
+      #          team_slug,
+      #          owner,
+      #          repo,
+      #        });
+      #       });
 
