@@ -41,7 +41,7 @@ jobs:
         with:
           github-token: ${{ secrets.token }}
           script: |
-            const teams = ${{env.teamArray}}
+            const teams = ${{inputs.teamArray}}
             console.log('teamArray: ' + teams)
             const repo = context.repo.repo
             const org = context.repo.owner
